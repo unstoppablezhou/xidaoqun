@@ -1,0 +1,6 @@
+# Django stuff忽略掉local_settings.py
+local_settings.py
+
+# database migrations
+*/migration/8.py
+!*/migration/_init_.py
