@@ -1,8 +1,12 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>注册</title>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1-dist/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.css' %}">
 </head>
 <body>
 <h1>用户注册</h1>
@@ -25,5 +29,13 @@
     </div>
 
 </form>
+
+{% for field in form %}
+    <p>{{ field.label }}:{{ field }}</p>
+{% endfor %}
+
+<script src="{% static 'js/jquery-3.6.0.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-3.4.1-dist/js/bootstrap.js' %}"></script>
+
 </body>
 </html>

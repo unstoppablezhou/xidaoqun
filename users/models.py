@@ -3,10 +3,11 @@ from django.db import models
 
 # Create your models here.
 
-# 定义用户类型
-class Users(models.Model):
+# 定义用户信息类型
+class UserInfo(models.Model):
 
-    userId = models.AutoField(primary_key=True)
-    userName = models.CharField(max_length=50)
+    userEmail = models.EmailField(verbose_name="邮箱", max_length=32)
+    userName = models.CharField(verbose_name="名称", max_length=32)
+    passWord = models.CharField(verbose_name="密码", max_length=32)
 
 
