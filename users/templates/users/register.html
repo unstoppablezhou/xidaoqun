@@ -1,0 +1,70 @@
+{% extends 'layout/basic.html' %}
+{% load static %}
+
+{% block css %}
+     <style>
+        .account{
+            width: 400px;
+            margin: 0 auto;
+        }
+        .error{
+            color: red;
+            position: absolute;
+        }
+        .form-group{
+            height: 70px;
+        }
+    </style>
+{% endblock %}
+{% block title %}
+
+{% endblock %}
+{% block content %}
+    <div class="account">
+    <h1>用户注册</h1>
+    <form id="regForm" method="post" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            <span class="error"></span>
+        </div>
+        {% endfor %}
+        <button type="button" id="btnSubmit" class="btn btn-default">注 册</button>
+    </form>
+    </div>
+{% endblock %}
+{% block js %}
+    <script>
+        $(function(){
+            bindClickbait();
+        });
+
+        /* 点击注册 */
+        function bindClickbait(){
+            $('#btnSubmit').click(function (){
+                $('.error').empty();
+                //收集表单中的数据    $('#regform').serialize() //所有字段数据+csrf token
+                //数据ajax发送到后台
+                $.ajax({
+                    url:"{% url 'register' %}",
+                    type:"post",
+                    data:$('#regForm').serialize(),
+                    dataType:"JSON",
+                    success:function (res){
+                        if(res.status){
+                            location.href = res.data; //注册成功后跳转到哪
+                        }else{
+                            $.each(res.error, function (key, value) {
+                                $("#id_" + key).next().text(value[0]);
+                            })
+
+                        }
+                    }
+                })
+            })
+        }
+
+    </script>
+{% endblock %}

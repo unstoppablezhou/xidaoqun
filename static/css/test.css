@@ -1,0 +1,27 @@
+
+        .navbar{
+        <!--去掉圆角 -->
+            border-radius: 0;
+        }
+        .collapse{
+            margin-top: 5px;
+            float: right;
+        }
+        .dropdown{
+            margin-right: 5px;
+            float: left;
+        }
+        .navbar-form{
+            clear: both;
+        }
+        .navbar-header{
+            float: left;
+        }
+       .container-fluid{
+           clear: both;
+       }
+       .navbar-form{
+           margin-right: 300px;
+       }
+
+
