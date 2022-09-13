@@ -2,9 +2,10 @@ from django import forms
 from django.core.exceptions import ValidationError
 from utils import encrypt
 from users import models
+from users.forms.bootstrap_form import BootStrapForm
 
 
-class RegisterModelForm(forms.ModelForm):
+class RegisterModelForm(BootStrapForm, forms.ModelForm):
     # passWord = forms.CharField(label="密码", widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': '请输入密码'}))
 
     password = forms.CharField(label="密码",
@@ -29,12 +30,6 @@ class RegisterModelForm(forms.ModelForm):
     class Meta:
         model = models.UsersInfo
         fields = ['email', 'username', 'password', 'confirm_password']
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
-            field.widget.attrs['placeholder'] = '请输入%s' % (field.label,)
 
     def clean_email(self):
         email = self.cleaned_data['email']  # cleaned_data['email']只能拿到前面的值，如['username', 'email']
